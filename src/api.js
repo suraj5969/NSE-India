@@ -79,4 +79,4 @@ router.get('/placeholder_data', async (req, res) => {
 
 app.use('/.netlify/functions/api', router); // path must route to lambda
 
-app.listen(3000,()=>{console.log('listening on port 3000')})
+module.exports.handler = serverless(app);
