@@ -14,12 +14,16 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/nse_data', async (req, res) => {
+router.get('/nse_data', (req, res) => {
 
     try {
 
-        // const data = await axios.get('https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY');
-        res.json('testing nse route');
+        const data = axios.get('https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY')
+        .then(data => {
+            res.json(data.data)
+        }).catch(err => {
+            res.json(err)
+        })
         // if (data.status === 200) {
         // }
         // else {
@@ -28,7 +32,7 @@ router.get('/nse_data', async (req, res) => {
     }
     catch (err) {
         console.log(err);
-        res.send('got error in catch block for nse') 
+        res.send('got error in catch block for nse')
     }
 })
 
@@ -46,7 +50,7 @@ router.get('/placeholder_data', async (req, res) => {
     }
     catch (err) {
         console.log(err);
-        res.send('got error in catch block for jsonplaceholder') 
+        res.send('got error in catch block for jsonplaceholder')
     }
 })
 
