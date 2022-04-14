@@ -20,6 +20,7 @@ router.get('/nse_data', (req, res) => {
 
         // console.log('req.query', req);
         const headers = {
+            host: 'www.nseindia.com',
             connection: 'keep-alive',
             'cache-control': 'max-age=0',
             'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="100", "Google Chrome";v="100"',
@@ -38,13 +39,13 @@ router.get('/nse_data', (req, res) => {
             'if-none-match': 'W/"20-CMFHHhSdxEAtR/GNmFCOPJIHWrg"'
         };
 
-        const data = axios.get('https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY', {headers: headers})
+        const data = axios.get('https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY', { headers: headers })
             .then(data => {
                 // console.log('got data', data)
-                res.json(data.data)
+                res.json({ got: 'got-data', 'data': data.data })
             }).catch(err => {
                 // console.log('got error', err);
-                res.json(err)
+                res.json({ got: 'error', err: err })
             })
         // if (data.status === 200) {
         // }
@@ -78,4 +79,4 @@ router.get('/placeholder_data', async (req, res) => {
 
 app.use('/.netlify/functions/api', router); // path must route to lambda
 
-module.exports.handler = serverless(app);
+app.listen(3000,()=>{console.log('listening on port 3000')})
