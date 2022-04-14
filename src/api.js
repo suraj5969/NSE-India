@@ -18,13 +18,13 @@ router.get('/nse_data', async (req, res) => {
 
     try {
 
-        const data = await axios.get('https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY');
-        if (data.status === 200) {
-            res.json(data.data);
-        }
-        else {
-            res.send('data not received from nse')
-        }
+        // const data = await axios.get('https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY');
+        res.json('testing nse route');
+        // if (data.status === 200) {
+        // }
+        // else {
+        //     res.send('data not received from nse')
+        // }
     }
     catch (err) {
         console.log(err);
